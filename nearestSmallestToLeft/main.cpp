@@ -18,7 +18,7 @@
 
 using namespace std;
 
-vector<pair<int,int>> getNearestGreaterToLeft(int arr[], int size){
+vector<pair<int,int>> getNearestSmallestToLeft(int arr[], int size){
     vector<pair<int,int>> result;
     stack<pair<int,int>> st;
     for(int i=0;i<size;i++){
@@ -26,17 +26,17 @@ vector<pair<int,int>> getNearestGreaterToLeft(int arr[], int size){
             result.push_back(make_pair(-1,-1));
         }
         else{
-            if(st.top().first> arr[i]){
+            if(st.top().first< arr[i]){
                 result.push_back(st.top());
             }
             else{
-                while(!st.empty()&& st.top().first<arr[i]){
+                while(!st.empty()&& st.top().first>arr[i]){
                     st.pop();
                 }
                 if(st.empty()){
                     result.push_back(make_pair(-1,-1));
                 }
-                else if(st.top().first> arr[i]){
+                else if(st.top().first< arr[i]){
                     result.push_back(st.top());                    
                 }
             }
@@ -51,7 +51,7 @@ vector<pair<int,int>> getNearestGreaterToLeft(int arr[], int size){
  */
 int main(int argc, char** argv) {
     int arr[]={1,3,2,4,6,5,7,3};
-    vector<pair<int,int>> result = getNearestGreaterToLeft(arr,8);
+    vector<pair<int,int>> result = getNearestSmallestToLeft(arr,8);
     for( auto x: result){
         cout <<"["<<x.first<<","<<x.second<<"]"<<"\t";
     }
